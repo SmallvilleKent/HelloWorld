@@ -1,0 +1,16 @@
+When configuring a Glue job within AWS, setting up the network infrastructure involves specifying the Virtual Private Cloud (VPC), subnets, and security groups. Here's a brief summary and recommendations on how many to add for each component:
+
+Virtual Private Cloud (VPC)
+Summary: A VPC is a virtual network dedicated to your AWS account. It is logically isolated from other virtual networks in the AWS Cloud. VPCs allow you to launch AWS resources into a virtual network that you've defined.
+Recommendation: You typically need just one VPC for a Glue job unless your data sources or targets are spread across different VPCs for isolation or organizational purposes.
+Subnets
+Summary: Subnets allow you to partition the VPC into distinct networks. They enable you to allocate a range of IP addresses within the VPC to different resources, which can enhance security and traffic management.
+Recommendation: At least two subnets in different availability zones (AZs) are recommended for high availability. Glue jobs can be configured to access resources in these subnets, providing fault tolerance.
+Security Groups
+Summary: Security groups act as a virtual firewall for your resources to control inbound and outbound traffic. Security groups are associated with EC2 instances and can be used to control the traffic to and from Glue jobs.
+Recommendation: Typically, you would create one security group for your Glue jobs that allows the necessary inbound and outbound traffic for the job to communicate with its data sources and targets. The exact number may increase if your Glue job needs to interact with other services that require different access rules.
+Configuration Steps:
+Create a VPC or use an existing VPC suitable for your Glue job.
+Add Subnets: Ensure there are at least two subnets in different AZs within the VPC for high availability.
+Configure Security Groups: Create a security group (or groups) with rules that only allow the necessary traffic for your Glue job to function correctly.
+By following these recommendations, you can set up a network that supports your Glue job's requirements, offering both security and high availability.
